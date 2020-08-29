@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=Graph
 comment1.params=n
-comment1.target=void\ addNode(Graph.Node)
+comment1.target=void\ addNode(Node)
 comment2.params=
 comment2.target=java.util.ArrayList\ getNodes()
 numComments=3
