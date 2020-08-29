@@ -9,15 +9,32 @@
 import java.util.ArrayList;
 
 public class Graph {
-    private ArrayList<Character[]> links = new ArrayList<Character[]>();
-    private ArrayList<Character> nodes = new ArrayList<>();
+    private static ArrayList<Node> nodes = new ArrayList<>();
     
-    public void addPath(char v1, char v2, char dist) {
-        Character[] vals = {v1, v2, dist};
-        links.add(vals);
+    public static void addNode(Node n) {
+        nodes.add(n);
     }
     
-    public void addNode(char n) {
-        nodes.add(n);
+    public static ArrayList<Node> getNodes() {
+        return nodes;
+    }
+    
+    public class Node {
+        private char symbol;
+        private ArrayList<Object[]> links = new ArrayList<Object[]>();
+        private final int MAX_DIST = 128;
+        
+        public Node(char c) {
+            this.symbol = c;
+        }
+        
+        public boolean addLink(Node v, char dist) {
+            if (Graph.getNodes().contains(v) && dist < MAX_DIST && dist >= 0) {
+                Object[] vals = {v, dist};
+                links.add(vals);
+                return true;
+            }
+            return false;
+        }
     }
 }
