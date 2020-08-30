@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 
 public class Node {
-        private char symbol;
+        private Character symbol;
         private int row, col;
         private ArrayList<Object[]> links = new ArrayList<Object[]>();
         
-        public Node(char c, int row, int col) {
+        public Node(Character c, int row, int col) {
             this.symbol = c;
             this.row = row;
             this.col = col;
@@ -21,7 +21,11 @@ public class Node {
             return false;
         }
         
-        public static Node getNode(char c) {
+        public Character getSymbol() {
+            return symbol;
+        }
+        
+        public static Node getNode(Character c) {
             ArrayList<Node> nodes = Graph.getNodes();
             for (Node n : nodes) {
                 if (n.symbol == c) {

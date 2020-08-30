@@ -8,6 +8,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Circle;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import java.io.Console;
@@ -91,6 +92,10 @@ public class Visualise extends Application
         myButton.setOnAction(this::buttonClick);
 
         // Add the button and label into the pane
+        for (Node n : Graph.getNodes()) {
+            pane.add(new Circle(1), 1, 1);
+            pane.add(new Label(String.valueOf(n.getSymbol())), 1, 0);
+        }
         pane.add(myLabel, 1, 0);
         pane.add(myButton, 0, 0);
 
