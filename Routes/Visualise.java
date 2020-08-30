@@ -11,7 +11,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import java.io.Console;
-import java.util.Scanner;
+//import java.util.Scanner;
 
 /**
  * Write a description of JavaFX class Visualise here.
@@ -37,12 +37,12 @@ public class Visualise extends Application
     public void start(Stage stage)
     {
        // GraphDriver.start();
-        Scanner sin = new Scanner(System.in);
+       // Scanner sin = new Scanner(System.in);
         
         Console input = System.console();
         //Scanner input = new Scanner(System.in);
         System.out.print("Enter max vertical coordinate: ");
-        MAX_ROW = (sin.nextInt());
+        MAX_ROW = Integer.parseInt(input.readLine());
         //MAX_ROW = Integer.parseInt(input.readLine());
         System.out.print("Enter max horizontal coordinate: ");
         MAX_COL = Integer.parseInt(input.readLine());
