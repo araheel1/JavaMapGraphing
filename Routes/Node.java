@@ -34,4 +34,14 @@ public class Node {
             }
             return null; // Requires validation for unavailable node symbol
         }
+
+
+	public int getRow() {
+            return row; // Requires validation for unavailable node symbol
+        }
+
+	public int getCol() {
+            return col; // Requires validation for unavailable node symbol
+        }
+
     }

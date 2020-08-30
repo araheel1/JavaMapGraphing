@@ -12,6 +12,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import java.io.Console;
+import javafx.scene.paint.Color;
 //import java.util.Scanner;
 
 /**
@@ -93,11 +94,12 @@ public class Visualise extends Application
 
         // Add the button and label into the pane
         for (Node n : Graph.getNodes()) {
-            pane.add(new Circle(1), 1, 1);
+            pane.add(new Circle(10), 5*(n.getRow()+1), 5*(n.getCol()+1));
             pane.add(new Label(String.valueOf(n.getSymbol())), 1, 0);
         }
-        pane.add(myLabel, 1, 0);
-        pane.add(myButton, 0, 0);
+	pane.add(new Circle(20, Color.RED), 50, 50);
+        //pane.add(myLabel, 1, 0);
+        //pane.add(myButton, 0, 0);
 
         // JavaFX must have a Scene (window content) inside a Stage (window)
         Scene scene = new Scene(pane, 800,800);
