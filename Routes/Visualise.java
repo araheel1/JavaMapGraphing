@@ -6,13 +6,15 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.text.Text;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Circle;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import java.io.Console;
 import javafx.scene.paint.Color;
+import java.util.ArrayList;
 //import java.util.Scanner;
 
 /**
@@ -25,7 +27,7 @@ public class Visualise extends Application
 {
     // We keep track of the count, and label displaying the count:
     private int count = 0;
-    private Label myLabel = new Label("0");
+    //private Label myLabel = new Label("0");
 
     /**
      * The start method is the main entry point for every JavaFX application. 
@@ -59,7 +61,7 @@ public class Visualise extends Application
             System.out.println("Node "+node_count+": ");
             node_info = (input.readLine());
             if (!node_info.equals("EOL")) {
-                Node n = new Node(node_info.charAt(0), node_info.charAt(2), node_info.charAt(4));
+                Node n = new Node(node_info.charAt(0), Character.digit(node_info.charAt(2), 10), Character.digit(node_info.charAt(4), 10));
                 Graph.addNode(n); // Requires input validation
             }
         }
@@ -83,26 +85,35 @@ public class Visualise extends Application
         Button myButton = new Button("Count");
 
         // Create a new grid pane
-        GridPane pane = new GridPane();
-        pane.setPadding(new Insets(10, 10, 10, 10));
-        pane.setMinSize(750, 750);
-        pane.setVgap(10);
-        pane.setHgap(10);
+        //GridPane pane = new GridPane();
+	Pane canvas = new Pane();
+	canvas.setPrefSize(600,600);
+        //pane.setPadding(new Insets(10, 10, 10, 10));
+        //pane.setMinSize(750, 750);
+        //pane.setVgap(10);
+        //pane.setHgap(10);
 
         //set an action on the button using method reference
         myButton.setOnAction(this::buttonClick);
 
         // Add the button and label into the pane
         for (Node n : Graph.getNodes()) {
-            pane.add(new Circle(10), 5*(n.getRow()+1), 5*(n.getCol()+1));
-            pane.add(new Label(String.valueOf(n.getSymbol())), 1, 0);
+	    System.out.println(n.getRow()+" "+n.getCol()+" "+n.getSymbol());
+            canvas.getChildren().add(new Circle(50*(n.getRow()+1), 50*(n.getCol()+1), 25));
+            canvas.getChildren().add(new Text(50*(n.getRow()+1), 50*(n.getCol()+1)+100, String.valueOf(n.getSymbol())));
+	    ArrayList<Object[]> links = n.getLinks();
+	    for (int x=0; x<links.size(); x++) {
+	        Node n2 = (Node) links.get(x)[0];
+		canvas.getChildren().add(new Line(50*(n.getRow()+1), 50*(n.getCol()+1), 50*(n2.getRow()+1), 50*(n2.getCol()+1)));
+	    }
         }
-	pane.add(new Circle(20, Color.RED), 50, 50);
+	//pane.add(new Circle(10, Color.RED), 50, 50);
+	//canvas.getChildren().add(pane);
         //pane.add(myLabel, 1, 0);
         //pane.add(myButton, 0, 0);
 
         // JavaFX must have a Scene (window content) inside a Stage (window)
-        Scene scene = new Scene(pane, 800,800);
+        Scene scene = new Scene(canvas, 800,800);
         stage.setTitle("JavaFX Example");
         stage.setScene(scene);
 
@@ -118,6 +129,6 @@ public class Visualise extends Application
     {
         // Counts number of button clicks and shows the result on a label
         count = count + 1;
-        myLabel.setText(Integer.toString(count));
+        //myLabel.setText(Integer.toString(count));
     }
 }

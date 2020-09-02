@@ -44,4 +44,8 @@ public class Node {
             return col; // Requires validation for unavailable node symbol
         }
 
+
+	public ArrayList<Object[]> getLinks() {
+	    return links;
+	}
     }
