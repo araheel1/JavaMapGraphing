@@ -94,8 +94,8 @@ public class Visualise extends Application
            }
            if (!(node_linkage.equals("N") || node_linkage.equals("n") ||
            node_linkage.equals("No") || node_linkage.equals("no"))) {
-               Node n1 = Node.getNode(node_linkage_1);
-               Node n2 = Node.getNode(node_linkage_2);
+               Node n1 = Node.getNode(node_linkage_1, Graph.getNodes());
+               Node n2 = Node.getNode(node_linkage_2, Graph.getNodes());
                n1.addLink(n2);
            }
        }
@@ -130,7 +130,7 @@ public class Visualise extends Application
         nodes_to_draw = curr_node.getSubnodes();
       }
       for (Node n : nodes_to_draw) {
-          System.out.println(n.getRow()+" "+n.getCol()+" "+n.getSymbol());
+          //System.out.println(n.getRow()+" "+n.getCol()+" "+n.getSymbol());
           ArrayList<Object[]> links = n.getLinks();
           for (int x=0; x<links.size(); x++) {
               Node n2 = (Node) links.get(x)[0];

@@ -38,18 +38,18 @@ public class Node {
             return name;
         }
 
-        public static Node getNode(String c) {
-            ArrayList<Node> nodes = Graph.getNodes();
+        public static Node getNode(String c, ArrayList<Node> nodes) {
+            //ArrayList<Node> nodes = Graph.getNodes();
             for (Node n : nodes) {
-                for (Node nx : n.getSubnodes()) {
-                    if (nx.name.equals(c)) {
-                        //System.out.println(c);
+                if (n.name.equals(c)) {
+                    System.out.println(c);
+                    return n;
+                }
+                if (n.getSubnodes().size() > 0) {
+                    Node nx = getNode(c, n.getSubnodes());
+                    if (nx != null) {
                         return nx;
                     }
-                }
-                if (n.name.equals(c)) {
-                    //System.out.println(c);
-                    return n;
                 }
             }
             return null; // Requires validation for unavailable node symbol
